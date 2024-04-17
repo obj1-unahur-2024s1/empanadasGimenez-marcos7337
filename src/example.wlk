@@ -8,7 +8,14 @@ object galvan {
 		return 150000
 	}
 	method cobrarSueldo() {
-		dinero += self.sueldo()
+		dinero += (self.sueldo() - deuda).max(0)
+		deuda = (deuda - self.sueldo()).max(0)
+	}
+	method totalDinero() {
+		return dinero
+	}
+	method totalDeuda() {
+		return deuda
 	}
 	method gastar(cantidad) {
 		deuda = if(cantidad > dinero){deuda + (cantidad-dinero)}  else {deuda}
